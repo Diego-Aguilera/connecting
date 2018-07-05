@@ -49,7 +49,7 @@ public class Usuarios {
 			 										   + "values (?,?,?,?,?)")
 			 ) {
 			
-			ps.setString(1, usuario.getCodUsuario());
+			ps.setInt(1, usuario.getCodUsuario());
 			ps.setString(2, usuario.getNombre());
 			ps.setString(3, usuario.getTelefono());
 			ps.setString(4, usuario.getEmail());
@@ -86,7 +86,7 @@ public class Usuarios {
 			ps.setString(2, usuario.getTelefono());
 			ps.setString(3, usuario.getEmail());
 			ps.setString(4, usuario.getPassword());
-			ps.setString(5, usuario.getCodUsuario());
+			ps.setInt(5, usuario.getCodUsuario());
 			
 			ps.executeUpdate();
 			
@@ -106,7 +106,7 @@ public class Usuarios {
 	@DELETE
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response eliminarUsuario(@PathParam("id") String codUsuario) {
+	public Response eliminarUsuario(@PathParam("id") int codUsuario) {
 
 		Response.ResponseBuilder builder = null;
 
@@ -115,7 +115,7 @@ public class Usuarios {
 			 										   + "where cod_usuario = ?")
 			 ) {
 						
-			ps.setString(1, codUsuario);
+			ps.setInt(1, codUsuario);
 			
 			ps.executeUpdate();
 			
@@ -149,8 +149,10 @@ public class Usuarios {
 			ResultSet rs = ps.executeQuery();
 			ArrayList<Usuario> listaUsuario = cargarUsuarios(rs);
 			
-			if (listaUsuario.size() == 0)
+			if (listaUsuario.size() == 0) {
 				return null;
+			}
+				
 			else
 				return listaUsuario.get(0);
 		
@@ -186,7 +188,7 @@ public class Usuarios {
 		while(rs.next()) {
 			Usuario usuarioActual = new Usuario();
 			
-			usuarioActual.setCodUsuario(rs.getString("cod_usuario"));
+			usuarioActual.setCodUsuario(rs.getInt("cod_usuario"));
 			usuarioActual.setNombre(rs.getString("nombre"));
 			usuarioActual.setTelefono(rs.getString("telefono"));
 			usuarioActual.setEmail(rs.getString("email"));

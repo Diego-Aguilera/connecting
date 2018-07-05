@@ -57,7 +57,7 @@ public class Grupos {
 			sql += "and longitud = " + longitud;
 		
 		if (codUsuario != null)
-			sql += "and codUsuario = " + codUsuario;
+			sql += "and cod_usuario_creacion = " + codUsuario;
 
 		try (Connection con = ds.getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql)
@@ -119,7 +119,7 @@ public class Grupos {
 			ps.setString(3, grupo.getObjetivo());
 			ps.setInt(4, grupo.getLongitud());
 			ps.setInt(5, grupo.getLatitud());
-			ps.setString(6, grupo.getCodUsuarioCreacion());
+			ps.setInt(6, grupo.getCodUsuarioCreacion());
 			ps.setDate(7, new Date(System.currentTimeMillis()));
 			
 			ps.executeUpdate();
@@ -150,7 +150,7 @@ public class Grupos {
 			grupoActual.setObjetivo(rs.getString("objetivo"));
 			grupoActual.setLatitud(rs.getInt("latitud"));
 			grupoActual.setLongitud(rs.getInt("longitud"));
-			grupoActual.setCodUsuarioCreacion(rs.getString("cod_usuario_creacion"));
+			grupoActual.setCodUsuarioCreacion(rs.getInt("cod_usuario_creacion"));
 			grupoActual.setFechaUsuarioCreacion(rs.getDate("fecha_creacion")); 
 			
 			listaGrupos.add(grupoActual);

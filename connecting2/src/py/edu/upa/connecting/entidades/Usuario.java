@@ -9,16 +9,16 @@ public class Usuario implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	String codUsuario;
+	int codUsuario;
 	String nombre;
 	String telefono;
 	String email;
 	String password;
 	
-	public String getCodUsuario() {
+	public int getCodUsuario() {
 		return codUsuario;
 	}
-	public void setCodUsuario(String codUsuario) {
+	public void setCodUsuario(int codUsuario) {
 		this.codUsuario = codUsuario;
 	}
 	public String getNombre() {
